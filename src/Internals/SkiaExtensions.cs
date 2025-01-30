@@ -32,7 +32,10 @@ internal static class SkiaExtensions
                 ISkiaSharpApiLease lease = leaseFeature.Lease();
                 using (lease)
                 {
-                    lease.SkCanvas.DrawBitmap(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
+                    if (bitmap.Handle != 0)
+                    {
+                        lease.SkCanvas.DrawBitmap(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
+                    }
                 }
             }
         }
